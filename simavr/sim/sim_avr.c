@@ -21,6 +21,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -455,6 +456,14 @@ std_logger(
 		const char * format,
 		va_list ap)
 {
+	#ifndef FANCY_UART
+	//set stdout to non_buffering
+	static bool configured = false;
+	if (!configured){
+		setvbuf(stdout, NULL, _IONBF, BUFSIZ);
+		configured = true;
+	}
+	#endif
 	if (!avr || avr->log >= level) {
 		vfprintf((level < LOG_ERROR) ?  stdout : stderr, format, ap);
 	}
