@@ -272,6 +272,7 @@ avr_uart_udr_write(
 		const int maxsize = 256;
 		if (!p->stdio_out)
 			p->stdio_out = malloc(maxsize);
+		#ifdef FANCY_UART
 		p->stdio_out[p->stdio_len++] = v < ' ' ? '.' : v;
 		p->stdio_out[p->stdio_len] = 0;
 		if (v == '\n' || p->stdio_len == maxsize) {
@@ -279,6 +280,12 @@ avr_uart_udr_write(
 			AVR_LOG(avr, LOG_OUTPUT,
 					FONT_GREEN "%s\n" FONT_DEFAULT, p->stdio_out);
 		}
+		#else //unbuffered output
+		//p->stdio_out[p->stdio_len] = 0;
+		//p->stdio_len = 0;
+		//AVR_LOG(avr, LOG_OUTPUT, "%s", p->stdio_out);
+		AVR_LOG(avr, LOG_OUTPUT, "%c", v);
+		#endif
 	}
 	TRACE(printf("UDR%c(%02x) = %02x\n", p->name, addr, v);)
 	// tell other modules we are "outputting" a byte
