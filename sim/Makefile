@@ -43,4 +43,5 @@ clean:
 	$(MAKE) -C examples clean
 	$(MAKE) -C examples/parts clean
 	$(MAKE) -C doc clean
+	rm -rf result
 

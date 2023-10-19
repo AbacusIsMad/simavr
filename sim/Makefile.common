@@ -81,7 +81,7 @@ ifeq (${shell uname}, Darwin)
   endif
  endif
 else
- AVR 		:= avr-
+ AVR 		:= ${AVR_ROOT}/avr-
 endif
 
 # FIXME uname -o doesn't work on bsd derivatives
