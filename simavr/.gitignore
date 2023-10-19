@@ -1,3 +1,4 @@
 sim_core_decl.h
 sim_core_config.h
 .vscode/*
+result/*

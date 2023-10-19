@@ -111,7 +111,7 @@ struct avr_mmcu_vcd_trace_t {
 	const struct avr_mmcu_string_t _##_tag _MMCU_ = {\
 		.tag = _tag,\
 		.len = sizeof(struct avr_mmcu_string_t) - 2,\
-		.string = _str,\
+		{.string = _str},\
 	}
 /*
  * This trick allows concatenation of tokens. We need a macro redirection
