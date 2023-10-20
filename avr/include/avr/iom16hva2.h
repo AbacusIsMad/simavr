@@ -1,123 +1,65 @@
-/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
-   All rights reserved.
-
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are met:
-
-   * Redistributions of source code must retain the above copyright
-     notice, this list of conditions and the following disclaimer.
-
-   * Redistributions in binary form must reproduce the above copyright
-     notice, this list of conditions and the following disclaimer in
-     the documentation and/or other materials provided with the
-     distribution. Publication is not required when this file is used
-     in an embedded application.
-
-   * Neither the name of the copyright holders nor the names of
-     contributors may be used to endorse or promote products derived
-     from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. */
-
-/* $Id: iom16hva2.h 2192 2010-11-08 13:53:24Z arcanum $ */
-
-/* avr/iom16hva2.h - definitions for ATmega16HVA2 */
-
-/* This file should only be included from <avr/io.h>, never directly. */
-
 #ifndef _AVR_IO_H_
-#  error "Include <avr/io.h> instead of this file."
+# error "Include <avr/io.h> instead of this file."
 #endif
-
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom16hva2.h"
+# define _AVR_IOXXX_H_ "iom16hva2.h"
 #else
-#  error "Attempt to include more than one <avr/ioXXX.h> file."
+# error "Attempt to include more than one <avr/ioXXX.h> file."
 #endif
-
-
 #ifndef _AVR_ATmega16HVA2_H_
 #define _AVR_ATmega16HVA2_H_ 1
-
-
-/* Registers and associated bit numbers. */
-
 #define PINA _SFR_IO8(0x00)
 #define PINA0 0
 #define PINA1 1
-
 #define DDRA _SFR_IO8(0x01)
 #define DDA0 0
 #define DDA1 1
-
 #define PORTA _SFR_IO8(0x02)
 #define PORTA0 0
 #define PORTA1 1
-
 #define PINB _SFR_IO8(0x03)
 #define PINB0 0
 #define PINB1 1
 #define PINB2 2
 #define PINB3 3
-
 #define DDRB _SFR_IO8(0x04)
 #define DDB0 0
 #define DDB1 1
 #define DDB2 2
 #define DDB3 3
-
 #define PORTB _SFR_IO8(0x05)
 #define PORTB0 0
 #define PORTB1 1
 #define PORTB2 2
 #define PORTB3 3
-
 #define PINC _SFR_IO8(0x06)
 #define PINC0 0
-
 #define PORTC _SFR_IO8(0x08)
 #define PORTC0 0
-
 #define TIFR0 _SFR_IO8(0x15)
 #define TOV0 0
 #define OCF0A 1
 #define OCF0B 2
 #define ICF0 3
-
 #define TIFR1 _SFR_IO8(0x16)
 #define TOV1 0
 #define OCF1A 1
 #define OCF1B 2
 #define ICF1 3
-
 #define OSICSR _SFR_IO8(0x17)
 #define OSIEN 0
 #define OSIST 1
 #define OSISEL0 4
-
 #define PCIFR _SFR_IO8(0x1B)
 #define PCIF0 0
-
 #define EIFR _SFR_IO8(0x1C)
 #define INTF0 0
 #define INTF1 1
 #define INTF2 2
-
 #define EIMSK _SFR_IO8(0x1D)
 #define INT0 0
 #define INT1 1
 #define INT2 2
-
 #define GPIOR0 _SFR_IO8(0x1E)
 #define GPIOR00 0
 #define GPIOR01 1
@@ -127,7 +69,6 @@
 #define GPIOR05 5
 #define GPIOR06 6
 #define GPIOR07 7
-
 #define EECR _SFR_IO8(0x1F)
 #define EERE 0
 #define EEPE 1
@@ -135,7 +76,6 @@
 #define EERIE 3
 #define EEPM0 4
 #define EEPM1 5
-
 #define EEDR _SFR_IO8(0x20)
 #define EEDR0 0
 #define EEDR1 1
@@ -145,7 +85,6 @@
 #define EEDR5 5
 #define EEDR6 6
 #define EEDR7 7
-
 #define EEAR _SFR_IO8(0x21)
 #define EEARL _SFR_IO8(0x21)
 #define EEAR0 0
@@ -156,11 +95,9 @@
 #define EEAR5 5
 #define EEAR6 6
 #define EEAR7 7
-
 #define GTCCR _SFR_IO8(0x23)
 #define PSRSYNC 0
 #define TSM 7
-
 #define TCCR0A _SFR_IO8(0x24)
 #define WGM00 0
 #define ICS0 3
@@ -168,14 +105,11 @@
 #define ICNC0 5
 #define ICEN0 6
 #define TCW0 7
-
 #define TCCR0B _SFR_IO8(0x25)
 #define CS00 0
 #define CS01 1
 #define CS02 2
-
 #define TCNT0 _SFR_IO16(0x26)
-
 #define TCNT0L _SFR_IO8(0x26)
 #define TCNT0L0 0
 #define TCNT0L1 1
@@ -185,7 +119,6 @@
 #define TCNT0L5 5
 #define TCNT0L6 6
 #define TCNT0L7 7
-
 #define TCNT0H _SFR_IO8(0x27)
 #define TCNT0H0 0
 #define TCNT0H1 1
@@ -195,7 +128,6 @@
 #define TCNT0H5 5
 #define TCNT0H6 6
 #define TCNT0H7 7
-
 #define OCR0A _SFR_IO8(0x28)
 #define OCR0A0 0
 #define OCR0A1 1
@@ -205,7 +137,6 @@
 #define OCR0A5 5
 #define OCR0A6 6
 #define OCR0A7 7
-
 #define OCR0B _SFR_IO8(0x29)
 #define OCR0B0 0
 #define OCR0B1 1
@@ -215,7 +146,6 @@
 #define OCR0B5 5
 #define OCR0B6 6
 #define OCR0B7 7
-
 #define GPIOR1 _SFR_IO8(0x2A)
 #define GPIOR10 0
 #define GPIOR11 1
@@ -225,7 +155,6 @@
 #define GPIOR15 5
 #define GPIOR16 6
 #define GPIOR17 7
-
 #define GPIOR2 _SFR_IO8(0x2B)
 #define GPIOR20 0
 #define GPIOR21 1
@@ -235,7 +164,6 @@
 #define GPIOR25 5
 #define GPIOR26 6
 #define GPIOR27 7
-
 #define SPCR _SFR_IO8(0x2C)
 #define SPR0 0
 #define SPR1 1
@@ -245,12 +173,10 @@
 #define DORD 5
 #define SPE 6
 #define SPIE 7
-
 #define SPSR _SFR_IO8(0x2D)
 #define SPI2X 0
 #define WCOL 6
 #define SPIF 7
-
 #define SPDR _SFR_IO8(0x2E)
 #define SPDR0 0
 #define SPDR1 1
@@ -260,26 +186,21 @@
 #define SPDR5 5
 #define SPDR6 6
 #define SPDR7 7
-
 #define DWDR _SFR_IO8(0x31)
-
 #define SMCR _SFR_IO8(0x33)
 #define SE 0
 #define SM0 1
 #define SM1 2
 #define SM2 3
-
 #define MCUSR _SFR_IO8(0x34)
 #define PORF 0
 #define EXTRF 1
 #define BODRF 2
 #define WDRF 3
 #define OCDRF 4
-
 #define MCUCR _SFR_IO8(0x35)
 #define PUD 4
 #define CKOE 5
-
 #define SPMCSR _SFR_IO8(0x37)
 #define SPMEN 0
 #define PGERS 1
@@ -287,7 +208,6 @@
 #define RFLB 3
 #define CTPB 4
 #define SIGRD 5
-
 #define WDTCSR _SFR_MEM8(0x60)
 #define WDP0 0
 #define WDP1 1
@@ -297,26 +217,22 @@
 #define WDP3 5
 #define WDIE 6
 #define WDIF 7
-
 #define CLKPR _SFR_MEM8(0x61)
 #define CLKPS0 0
 #define CLKPS1 1
 #define CLKPCE 7
-
 #define PRR0 _SFR_MEM8(0x64)
 #define PRVADC 0
 #define PRTIM0 1
 #define PRTIM1 2
 #define PRSPI 3
 #define PRVRM 5
-
-#define __AVR_HAVE_PRR0	((1<<PRVADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRVRM))
+#define __AVR_HAVE_PRR0 ((1<<PRVADC)|(1<<PRTIM0)|(1<<PRTIM1)|(1<<PRSPI)|(1<<PRVRM))
 #define __AVR_HAVE_PRR0_PRVADC
 #define __AVR_HAVE_PRR0_PRTIM0
 #define __AVR_HAVE_PRR0_PRTIM1
 #define __AVR_HAVE_PRR0_PRSPI
 #define __AVR_HAVE_PRR0_PRVRM
-
 #define FOSCCAL _SFR_MEM8(0x66)
 #define FCAL0 0
 #define FCAL1 1
@@ -326,10 +242,8 @@
 #define FCAL5 5
 #define FCAL6 6
 #define FCAL7 7
-
 #define PCICR _SFR_MEM8(0x68)
 #define PCIE0 0
-
 #define EICRA _SFR_MEM8(0x69)
 #define ISC00 0
 #define ISC01 1
@@ -337,27 +251,22 @@
 #define ISC11 3
 #define ISC20 4
 #define ISC21 5
-
 #define PCMSK0 _SFR_MEM8(0x6B)
 #define PCINT0 0
 #define PCINT1 1
 #define PCINT2 2
 #define PCINT3 3
-
 #define TIMSK0 _SFR_MEM8(0x6E)
 #define TOIE0 0
 #define OCIE0A 1
 #define OCIE0B 2
 #define ICIE0 3
-
 #define TIMSK1 _SFR_MEM8(0x6F)
 #define TOIE1 0
 #define OCIE1A 1
 #define OCIE1B 2
 #define ICIE1 3
-
 #define VADC _SFR_MEM16(0x78)
-
 #define VADCL _SFR_MEM8(0x78)
 #define VADC0 0
 #define VADC1 1
@@ -367,29 +276,24 @@
 #define VADC5 5
 #define VADC6 6
 #define VADC7 7
-
 #define VADCH _SFR_MEM8(0x79)
 #define VADC8 0
 #define VADC9 1
 #define VADC10 2
 #define VADC11 3
-
 #define VADCSR _SFR_MEM8(0x7A)
 #define VADCCIE 0
 #define VADCCIF 1
 #define VADSC 2
 #define VADEN 3
-
 #define VADMUX _SFR_MEM8(0x7C)
 #define VADMUX0 0
 #define VADMUX1 1
 #define VADMUX2 2
 #define VADMUX3 3
-
 #define DIDR0 _SFR_MEM8(0x7E)
 #define PA0DID 0
 #define PA1DID 1
-
 #define TCCR1A _SFR_MEM8(0x80)
 #define WGM10 0
 #define ICS1 3
@@ -397,14 +301,11 @@
 #define ICNC1 5
 #define ICEN1 6
 #define TCW1 7
-
 #define TCCR1B _SFR_MEM8(0x81)
 #define CS10 0
 #define CS11 1
 #define CS12 2
-
 #define TCNT1 _SFR_MEM16(0x84)
-
 #define TCNT1L _SFR_MEM8(0x84)
 #define TCNT1L0 0
 #define TCNT1L1 1
@@ -414,7 +315,6 @@
 #define TCNT1L5 5
 #define TCNT1L6 6
 #define TCNT1L7 7
-
 #define TCNT1H _SFR_MEM8(0x85)
 #define TCNT1H0 0
 #define TCNT1H1 1
@@ -424,7 +324,6 @@
 #define TCNT1H5 5
 #define TCNT1H6 6
 #define TCNT1H7 7
-
 #define OCR1A _SFR_MEM8(0x88)
 #define OCR1A0 0
 #define OCR1A1 1
@@ -434,7 +333,6 @@
 #define OCR1A5 5
 #define OCR1A6 6
 #define OCR1A7 7
-
 #define OCR1B _SFR_MEM8(0x89)
 #define OCR1B0 0
 #define OCR1B1 1
@@ -444,12 +342,10 @@
 #define OCR1B5 5
 #define OCR1B6 6
 #define OCR1B7 7
-
 #define ROCR _SFR_MEM8(0xC8)
 #define ROCWIE 0
 #define ROCWIF 1
 #define ROCS 7
-
 #define BGCCR _SFR_MEM8(0xD0)
 #define BGCC0 0
 #define BGCC1 1
@@ -458,7 +354,6 @@
 #define BGCC4 4
 #define BGCC5 5
 #define BGD 7
-
 #define BGCRR _SFR_MEM8(0xD1)
 #define BGCR0 0
 #define BGCR1 1
@@ -468,7 +363,6 @@
 #define BGCR5 5
 #define BGCR6 6
 #define BGCR7 7
-
 #define CADAC0 _SFR_MEM8(0xE0)
 #define CADAC00 0
 #define CADAC01 1
@@ -478,7 +372,6 @@
 #define CADAC05 5
 #define CADAC06 6
 #define CADAC07 7
-
 #define CADAC1 _SFR_MEM8(0xE1)
 #define CADAC08 0
 #define CADAC09 1
@@ -488,7 +381,6 @@
 #define CADAC13 5
 #define CADAC14 6
 #define CADAC15 7
-
 #define CADAC2 _SFR_MEM8(0xE2)
 #define CADAC16 0
 #define CADAC17 1
@@ -498,7 +390,6 @@
 #define CADAC21 5
 #define CADAC22 6
 #define CADAC23 7
-
 #define CADAC3 _SFR_MEM8(0xE3)
 #define CADAC24 0
 #define CADAC25 1
@@ -508,7 +399,6 @@
 #define CADAC29 5
 #define CADAC30 6
 #define CADAC31 7
-
 #define CADCSRA _SFR_MEM8(0xE4)
 #define CADSE 0
 #define CADSI0 1
@@ -518,7 +408,6 @@
 #define CADUB 5
 #define CADPOL 6
 #define CADEN 7
-
 #define CADCSRB _SFR_MEM8(0xE5)
 #define CADICIF 0
 #define CADRCIF 1
@@ -526,7 +415,6 @@
 #define CADICIE 4
 #define CADRCIE 5
 #define CADACIE 6
-
 #define CADRC _SFR_MEM8(0xE6)
 #define CADRC0 0
 #define CADRC1 1
@@ -536,9 +424,7 @@
 #define CADRC5 5
 #define CADRC6 6
 #define CADRC7 7
-
 #define CADIC _SFR_MEM16(0xE8)
-
 #define CADICL _SFR_MEM8(0xE8)
 #define CADICL0 0
 #define CADICL1 1
@@ -548,7 +434,6 @@
 #define CADICL5 5
 #define CADICL6 6
 #define CADICL7 7
-
 #define CADICH _SFR_MEM8(0xE9)
 #define CADICH0 0
 #define CADICH1 1
@@ -558,27 +443,23 @@
 #define CADICH5 5
 #define CADICH6 6
 #define CADICH7 7
-
 #define FCSR _SFR_MEM8(0xF0)
 #define CFE 0
 #define DFE 1
 #define CPS 2
 #define DUVRD 3
-
 #define BPIMSK _SFR_MEM8(0xF2)
 #define CHCIE 0
 #define DHCIE 1
 #define COCIE 2
 #define DOCIE 3
 #define SCIE 4
-
 #define BPIFR _SFR_MEM8(0xF3)
 #define CHCIF 0
 #define DHCIF 1
 #define COCIF 2
 #define DOCIF 3
 #define SCIF 4
-
 #define BPSCD _SFR_MEM8(0xF5)
 #define SCDL0 0
 #define SCDL1 1
@@ -588,7 +469,6 @@
 #define SCDL5 5
 #define SCDL6 6
 #define SCDL7 7
-
 #define BPDOCD _SFR_MEM8(0xF6)
 #define DOCDL0 0
 #define DOCDL1 1
@@ -598,7 +478,6 @@
 #define DOCDL5 5
 #define DOCDL6 6
 #define DOCDL7 7
-
 #define BPCOCD _SFR_MEM8(0xF7)
 #define COCDL0 0
 #define COCDL1 1
@@ -608,7 +487,6 @@
 #define COCDL5 5
 #define COCDL6 6
 #define COCDL7 7
-
 #define BPDHCD _SFR_MEM8(0xF8)
 #define DHCDL0 0
 #define DHCDL1 1
@@ -618,7 +496,6 @@
 #define DHCDL5 5
 #define DHCDL6 6
 #define DHCDL7 7
-
 #define BPCHCD _SFR_MEM8(0xF9)
 #define CHCDL0 0
 #define CHCDL1 1
@@ -628,7 +505,6 @@
 #define CHCDL5 5
 #define CHCDL6 6
 #define CHCDL7 7
-
 #define BPSCTR _SFR_MEM8(0xFA)
 #define SCPT0 0
 #define SCPT1 1
@@ -637,7 +513,6 @@
 #define SCPT4 4
 #define SCPT5 5
 #define SCPT6 6
-
 #define BPOCTR _SFR_MEM8(0xFB)
 #define OCPT0 0
 #define OCPT1 1
@@ -645,7 +520,6 @@
 #define OCPT3 3
 #define OCPT4 4
 #define OCPT5 5
-
 #define BPHCTR _SFR_MEM8(0xFC)
 #define HCPT0 0
 #define HCPT1 1
@@ -653,7 +527,6 @@
 #define HCPT3 3
 #define HCPT4 4
 #define HCPT5 5
-
 #define BPCR _SFR_MEM8(0xFD)
 #define CHCD 0
 #define DHCD 1
@@ -661,225 +534,175 @@
 #define DOCD 3
 #define SCD 4
 #define PRMD 7
-
 #define BPPLR _SFR_MEM8(0xFE)
 #define BPPL 0
 #define BPPLE 1
-
-
-/* Interrupt vectors */
-/* Vector 0 is the reset vector */
-#define BPINT_vect_num  1
-#define BPINT_vect      _VECTOR(1)  /* Battery Protection Interrupt */
-#define VREGMON_vect_num  2
-#define VREGMON_vect      _VECTOR(2)  /* Voltage regulator monitor interrupt */
-#define INT0_vect_num  3
-#define INT0_vect      _VECTOR(3)  /* External Interrupt Request 0 */
-#define INT1_vect_num  4
-#define INT1_vect      _VECTOR(4)  /* External Interrupt Request 1 */
-#define INT2_vect_num  5
-#define INT2_vect      _VECTOR(5)  /* External Interrupt Request 2 */
-#define PCINT0_vect_num  6
-#define PCINT0_vect      _VECTOR(6)  /* Pin Change Interrupt Request 0 */
-#define WDT_vect_num  7
-#define WDT_vect      _VECTOR(7)  /* Watchdog Timeout Interrupt */
-#define TIMER1_IC_vect_num  8
-#define TIMER1_IC_vect      _VECTOR(8)  /* Timer 1 Input capture */
-#define TIMER1_COMPA_vect_num  9
-#define TIMER1_COMPA_vect      _VECTOR(9)  /* Timer 1 Compare Match A */
-#define TIMER1_COMPB_vect_num  10
-#define TIMER1_COMPB_vect      _VECTOR(10)  /* Timer 1 Compare Match B */
-#define TIMER1_OVF_vect_num  11
-#define TIMER1_OVF_vect      _VECTOR(11)  /* Timer 1 overflow */
-#define TIMER0_IC_vect_num  12
-#define TIMER0_IC_vect      _VECTOR(12)  /* Timer 0 Input Capture */
-#define TIMER0_COMPA_vect_num  13
-#define TIMER0_COMPA_vect      _VECTOR(13)  /* Timer 0 Comapre Match A */
-#define TIMER0_COMPB_vect_num  14
-#define TIMER0_COMPB_vect      _VECTOR(14)  /* Timer 0 Compare Match B */
-#define TIMER0_OVF_vect_num  15
-#define TIMER0_OVF_vect      _VECTOR(15)  /* Timer 0 Overflow */
-#define SPI_STC_vect_num  16
-#define SPI_STC_vect      _VECTOR(16)  /* SPI Serial transfer complete */
-#define VADC_vect_num  17
-#define VADC_vect      _VECTOR(17)  /* Voltage ADC Conversion Complete */
-#define CCADC_CONV_vect_num  18
-#define CCADC_CONV_vect      _VECTOR(18)  /* Coulomb Counter ADC Conversion Complete */
-#define CCADC_REG_CUR_vect_num  19
-#define CCADC_REG_CUR_vect      _VECTOR(19)  /* Coloumb Counter ADC Regular Current */
-#define CCADC_ACC_vect_num  20
-#define CCADC_ACC_vect      _VECTOR(20)  /* Coloumb Counter ADC Accumulator */
-#define EE_READY_vect_num  21
-#define EE_READY_vect      _VECTOR(21)  /* EEPROM Ready */
-
-#define _VECTOR_SIZE 4 /* Size of individual vector. */
+#define BPINT_vect_num 1
+#define BPINT_vect _VECTOR(1)
+#define VREGMON_vect_num 2
+#define VREGMON_vect _VECTOR(2)
+#define INT0_vect_num 3
+#define INT0_vect _VECTOR(3)
+#define INT1_vect_num 4
+#define INT1_vect _VECTOR(4)
+#define INT2_vect_num 5
+#define INT2_vect _VECTOR(5)
+#define PCINT0_vect_num 6
+#define PCINT0_vect _VECTOR(6)
+#define WDT_vect_num 7
+#define WDT_vect _VECTOR(7)
+#define TIMER1_IC_vect_num 8
+#define TIMER1_IC_vect _VECTOR(8)
+#define TIMER1_COMPA_vect_num 9
+#define TIMER1_COMPA_vect _VECTOR(9)
+#define TIMER1_COMPB_vect_num 10
+#define TIMER1_COMPB_vect _VECTOR(10)
+#define TIMER1_OVF_vect_num 11
+#define TIMER1_OVF_vect _VECTOR(11)
+#define TIMER0_IC_vect_num 12
+#define TIMER0_IC_vect _VECTOR(12)
+#define TIMER0_COMPA_vect_num 13
+#define TIMER0_COMPA_vect _VECTOR(13)
+#define TIMER0_COMPB_vect_num 14
+#define TIMER0_COMPB_vect _VECTOR(14)
+#define TIMER0_OVF_vect_num 15
+#define TIMER0_OVF_vect _VECTOR(15)
+#define SPI_STC_vect_num 16
+#define SPI_STC_vect _VECTOR(16)
+#define VADC_vect_num 17
+#define VADC_vect _VECTOR(17)
+#define CCADC_CONV_vect_num 18
+#define CCADC_CONV_vect _VECTOR(18)
+#define CCADC_REG_CUR_vect_num 19
+#define CCADC_REG_CUR_vect _VECTOR(19)
+#define CCADC_ACC_vect_num 20
+#define CCADC_ACC_vect _VECTOR(20)
+#define EE_READY_vect_num 21
+#define EE_READY_vect _VECTOR(21)
+#define _VECTOR_SIZE 4
 #define _VECTORS_SIZE (22 * _VECTOR_SIZE)
-
-
-/* Constants */
 #define SPM_PAGESIZE (128)
-#define RAMSTART     (0x100)
-#define RAMSIZE      (1024)
-#define RAMEND       (RAMSTART + RAMSIZE - 1)
-#define XRAMSTART    (NA)
-#define XRAMSIZE     (NA)
-#define XRAMEND      (RAMEND)
-#define E2END        (0xFF)
-#define E2PAGESIZE   (4)
-#define FLASHEND     (0x3FFF)
-
-
-/* Fuses */
+#define RAMSTART (0x100)
+#define RAMSIZE (1024)
+#define RAMEND (RAMSTART + RAMSIZE - 1)
+#define XRAMSTART (NA)
+#define XRAMSIZE (NA)
+#define XRAMEND (RAMEND)
+#define E2END (0xFF)
+#define E2PAGESIZE (4)
+#define FLASHEND (0x3FFF)
 #define FUSE_MEMORY_SIZE 2
-
-/* Low Fuse Byte */
-#define FUSE_SUT0  (unsigned char)~_BV(0)  /* Select start-up time */
-#define FUSE_SUT1  (unsigned char)~_BV(1)  /* Select start-up time */
-#define FUSE_SUT2  (unsigned char)~_BV(2)  /* Select start-up time */
-#define FUSE_SELFPRGEN  (unsigned char)~_BV(3)  /* Enable self programming */
-#define FUSE_DWEN  (unsigned char)~_BV(4)  /* Enable debugWIRE */
-#define FUSE_SPIEN  (unsigned char)~_BV(5)  /* Enable Serial programming and Data Downloading */
-#define FUSE_EESAVE  (unsigned char)~_BV(6)  /* EEPROM memory is preserved through chip erase */
-#define FUSE_WDTON  (unsigned char)~_BV(7)  /* Watchdog Timer Always On */
+#define FUSE_SUT0 (unsigned char)~_BV(0)
+#define FUSE_SUT1 (unsigned char)~_BV(1)
+#define FUSE_SUT2 (unsigned char)~_BV(2)
+#define FUSE_SELFPRGEN (unsigned char)~_BV(3)
+#define FUSE_DWEN (unsigned char)~_BV(4)
+#define FUSE_SPIEN (unsigned char)~_BV(5)
+#define FUSE_EESAVE (unsigned char)~_BV(6)
+#define FUSE_WDTON (unsigned char)~_BV(7)
 #define LFUSE_DEFAULT (FUSE_SPIEN)
-
-/* High Fuse Byte */
-#define FUSE_OSCSEL0  (unsigned char)~_BV(0)  /* Oscillator Select 0 */
-#define FUSE_OSCSEL1  (unsigned char)~_BV(1)  /* Oscillator Select 1 */
-#define FUSE_COMPMODE  (unsigned char)~_BV(2)  /* Compatibility mode */
+#define FUSE_OSCSEL0 (unsigned char)~_BV(0)
+#define FUSE_OSCSEL1 (unsigned char)~_BV(1)
+#define FUSE_COMPMODE (unsigned char)~_BV(2)
 #define HFUSE_DEFAULT (FUSE_COMPMODE & FUSE_OSCSEL1)
-
-
-/* Lock Bits */
 #define __LOCK_BITS_EXIST
-
-
-/* Signature */
 #define SIGNATURE_0 0x1E
 #define SIGNATURE_1 0x94
 #define SIGNATURE_2 0x0E
-
-
-/* Device Pin Definitions */
-#define PV2_DDR   DDRV
-#define PV2_PORT  PORTV
-#define PV2_PIN   PINV
-#define PV2_BIT   2
-
-#define PV1_DDR   DDRV
-#define PV1_PORT  PORTV
-#define PV1_PIN   PINV
-#define PV1_BIT   1
-
-#define NV_DDR   DDRNV
-#define NV_PORT  PORTNV
-#define NV_PIN   PINNV
-#define NV_BIT   NV
-
-#define VFET_DDR   DDRVFET
-#define VFET_PORT  PORTVFET
-#define VFET_PIN   PINVFET
-#define VFET_BIT   VFET
-
-#define CF1P_DDR   DDRCF1P
-#define CF1P_PORT  PORTCF1P
-#define CF1P_PIN   PINCF1P
-#define CF1P_BIT   CF1P
-
-#define CF1N_DDR   DDRCF1N
-#define CF1N_PORT  PORTCF1N
-#define CF1N_PIN   PINCF1N
-#define CF1N_BIT   CF1N
-
-#define CF2P_DDR   DDRCF2P
-#define CF2P_PORT  PORTCF2P
-#define CF2P_PIN   PINCF2P
-#define CF2P_BIT   CF2P
-
-#define CF2N_DDR   DDRCF2N
-#define CF2N_PORT  PORTCF2N
-#define CF2N_PIN   PINCF2N
-#define CF2N_BIT   CF2N
-
-#define VREG_DDR   DDRVREG
-#define VREG_PORT  PORTVREG
-#define VREG_PIN   PINVREG
-#define VREG_BIT   VREG
-
-#define VREF_DDR   DDRVREF
-#define VREF_PORT  PORTVREF
-#define VREF_PIN   PINVREF
-#define VREF_BIT   VREF
-
-#define VREFGND_DDR   DDRVREFGND
-#define VREFGND_PORT  PORTVREFGND
-#define VREFGND_PIN   PINVREFGND
-#define VREFGND_BIT   VREFGND
-
-#define PI_DDR   DDRI
-#define PI_PORT  PORTI
-#define PI_PIN   PINI
+#define PV2_DDR DDRV
+#define PV2_PORT PORTV
+#define PV2_PIN PINV
+#define PV2_BIT 2
+#define PV1_DDR DDRV
+#define PV1_PORT PORTV
+#define PV1_PIN PINV
+#define PV1_BIT 1
+#define NV_DDR DDRNV
+#define NV_PORT PORTNV
+#define NV_PIN PINNV
+#define NV_BIT NV
+#define VFET_DDR DDRVFET
+#define VFET_PORT PORTVFET
+#define VFET_PIN PINVFET
+#define VFET_BIT VFET
+#define CF1P_DDR DDRCF1P
+#define CF1P_PORT PORTCF1P
+#define CF1P_PIN PINCF1P
+#define CF1P_BIT CF1P
+#define CF1N_DDR DDRCF1N
+#define CF1N_PORT PORTCF1N
+#define CF1N_PIN PINCF1N
+#define CF1N_BIT CF1N
+#define CF2P_DDR DDRCF2P
+#define CF2P_PORT PORTCF2P
+#define CF2P_PIN PINCF2P
+#define CF2P_BIT CF2P
+#define CF2N_DDR DDRCF2N
+#define CF2N_PORT PORTCF2N
+#define CF2N_PIN PINCF2N
+#define CF2N_BIT CF2N
+#define VREG_DDR DDRVREG
+#define VREG_PORT PORTVREG
+#define VREG_PIN PINVREG
+#define VREG_BIT VREG
+#define VREF_DDR DDRVREF
+#define VREF_PORT PORTVREF
+#define VREF_PIN PINVREF
+#define VREF_BIT VREF
+#define VREFGND_DDR DDRVREFGND
+#define VREFGND_PORT PORTVREFGND
+#define VREFGND_PIN PINVREFGND
+#define VREFGND_BIT VREFGND
+#define PI_DDR DDRI
+#define PI_PORT PORTI
+#define PI_PIN PINI
 #define PI_BIT
-
-#define NI_DDR   DDRNI
-#define NI_PORT  PORTNI
-#define NI_PIN   PINNI
-#define NI_BIT   NI
-
-#define PA0_DDR   DDRA
-#define PA0_PORT  PORTA
-#define PA0_PIN   PINA
-#define PA0_BIT   0
-
-#define PA1_DDR   DDRA
-#define PA1_PORT  PORTA
-#define PA1_PIN   PINA
-#define PA1_BIT   1
-
-#define PA2_DDR   DDRA
-#define PA2_PORT  PORTA
-#define PA2_PIN   PINA
-#define PA2_BIT   2
-
-#define PB0_DDR   DDRB
-#define PB0_PORT  PORTB
-#define PB0_PIN   PINB
-#define PB0_BIT   0
-
-#define PB1_DDR   DDRB
-#define PB1_PORT  PORTB
-#define PB1_PIN   PINB
-#define PB1_BIT   1
-
-#define PB2_DDR   DDRB
-#define PB2_PORT  PORTB
-#define PB2_PIN   PINB
-#define PB2_BIT   2
-
-#define PB3_DDR   DDRB
-#define PB3_PORT  PORTB
-#define PB3_PIN   PINB
-#define PB3_BIT   3
-
-#define PC0_DDR   DDRC
-#define PC0_PORT  PORTC
-#define PC0_PIN   PINC
-#define PC0_BIT   0
-
-#define BATT_DDR   DDRBATT
-#define BATT_PORT  PORTBATT
-#define BATT_PIN   PINBATT
-#define BATT_BIT   BATT
-
-#define OC_DDR   DDROC
-#define OC_PORT  PORTOC
-#define OC_PIN   PINOC
-#define OC_BIT   OC
-
+#define NI_DDR DDRNI
+#define NI_PORT PORTNI
+#define NI_PIN PINNI
+#define NI_BIT NI
+#define PA0_DDR DDRA
+#define PA0_PORT PORTA
+#define PA0_PIN PINA
+#define PA0_BIT 0
+#define PA1_DDR DDRA
+#define PA1_PORT PORTA
+#define PA1_PIN PINA
+#define PA1_BIT 1
+#define PA2_DDR DDRA
+#define PA2_PORT PORTA
+#define PA2_PIN PINA
+#define PA2_BIT 2
+#define PB0_DDR DDRB
+#define PB0_PORT PORTB
+#define PB0_PIN PINB
+#define PB0_BIT 0
+#define PB1_DDR DDRB
+#define PB1_PORT PORTB
+#define PB1_PIN PINB
+#define PB1_BIT 1
+#define PB2_DDR DDRB
+#define PB2_PORT PORTB
+#define PB2_PIN PINB
+#define PB2_BIT 2
+#define PB3_DDR DDRB
+#define PB3_PORT PORTB
+#define PB3_PIN PINB
+#define PB3_BIT 3
+#define PC0_DDR DDRC
+#define PC0_PORT PORTC
+#define PC0_PIN PINC
+#define PC0_BIT 0
+#define BATT_DDR DDRBATT
+#define BATT_PORT PORTBATT
+#define BATT_PIN PINBATT
+#define BATT_BIT BATT
+#define OC_DDR DDROC
+#define OC_PORT PORTOC
+#define OC_PIN PINOC
+#define OC_BIT OC
 #define SLEEP_MODE_IDLE (0x00<<1)
 #define SLEEP_MODE_ADC (0x01<<1)
 #define SLEEP_MODE_PWR_SAVE (0x03<<1)
 #define SLEEP_MODE_PWR_OFF (0x04<<1)
-
-#endif /* _AVR_ATmega16HVA2_H_ */
-
+#endif

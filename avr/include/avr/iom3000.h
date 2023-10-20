@@ -1,56 +1,13 @@
-/* Copyright (C) 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
-   All rights reserved.
-
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are met:
-
-   * Redistributions of source code must retain the above copyright
-     notice, this list of conditions and the following disclaimer.
-
-   * Redistributions in binary form must reproduce the above copyright
-     notice, this list of conditions and the following disclaimer in
-     the documentation and/or other materials provided with the
-     distribution. Publication is not required when this file is used
-     in an embedded application.
-
-   * Neither the name of the copyright holders nor the names of
-     contributors may be used to endorse or promote products derived
-     from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-  POSSIBILITY OF SUCH DAMAGE. */
-
-/* $Id$ */
-
-/* avr/iom3000.h - definitions for M3000 from Intelligent Motion Systems . */
-
-/* This file should only be included from <avr/io.h>, never directly. */
-
 #ifndef _AVR_IO_H_
-#  error "Include <avr/io.h> instead of this file."
+# error "Include <avr/io.h> instead of this file."
 #endif
-
 #ifndef _AVR_IOXXX_H_
-#  define _AVR_IOXXX_H_ "iom3000.h"
+# define _AVR_IOXXX_H_ "iom3000.h"
 #else
-#  error "Attempt to include more than one <avr/ioXXX.h> file."
-#endif 
-
-
+# error "Attempt to include more than one <avr/ioXXX.h> file."
+#endif
 #ifndef _AVR_IOM3000_H_
 #define _AVR_IOM3000_H_ 1
-
-/* Registers and associated bit numbers */
-
 #define IPD _SFR_IO16(0x00)
 #define IPDL _SFR_IO8(0x00)
 #define IPDH _SFR_IO8(0x01)
@@ -59,10 +16,10 @@
 #define IPAH _SFR_IO8(0x03)
 #define IPCR _SFR_IO8(0x04)
 #define ADRSLT _SFR_IO16(0x05)
-#define ADRSLTL _SFR_IO8(0x05)  /* Alias. */
-#define ADRSLTH _SFR_IO8(0x06)  /* Alias. */
-#define ADRSLTLO _SFR_IO8(0x05) /* Name according to datasheet. */
-#define ADRSLTHI _SFR_IO8(0x06) /* Name according to datasheet. */
+#define ADRSLTL _SFR_IO8(0x05)
+#define ADRSLTH _SFR_IO8(0x06)
+#define ADRSLTLO _SFR_IO8(0x05)
+#define ADRSLTHI _SFR_IO8(0x06)
 #define ADCSR _SFR_IO8(0x07)
 #define AMUXCTL _SFR_IO8(0x0B)
 #define MSPCR _SFR_IO8(0x0C)
@@ -76,17 +33,17 @@
 #define UCRA _SFR_IO8(0x12)
 #define UCRB _SFR_IO8(0x13)
 #define UBRR _SFR_IO8(0x14)
-#define UBRRL _SFR_IO8(0x14)  /* Alias. */
-#define UBRRH _SFR_IO8(0x15)  /* Alias. */
-#define UBRRLO _SFR_IO8(0x14) /* Name according to datasheet. */
-#define UBRRHI _SFR_IO8(0x15) /* Name according to datasheet. */
-#define GIFR _SFR_IO8(0x16) 
+#define UBRRL _SFR_IO8(0x14)
+#define UBRRH _SFR_IO8(0x15)
+#define UBRRLO _SFR_IO8(0x14)
+#define UBRRHI _SFR_IO8(0x15)
+#define GIFR _SFR_IO8(0x16)
 #define GIMSK _SFR_IO8(0x17)
 #define DACVAL _SFR_IO16(0x18)
-#define DACVALL _SFR_IO8(0x18)  /* Alias. */
-#define DACVALH _SFR_IO8(0x19)  /* Alias. */
-#define DACVALLO _SFR_IO8(0x18) /* Name according to datasheet. */
-#define DACVALHI _SFR_IO8(0x19) /* Name according to datasheet. */
+#define DACVALL _SFR_IO8(0x18)
+#define DACVALH _SFR_IO8(0x19)
+#define DACVALLO _SFR_IO8(0x18)
+#define DACVALHI _SFR_IO8(0x19)
 #define BGPPIN _SFR_IO8(0x1A)
 #define BGPDDR _SFR_IO8(0x1B)
 #define BGPPORT _SFR_IO8(0x1C)
@@ -112,8 +69,6 @@
 #define CGPDDR _SFR_IO8(0x31)
 #define CGPPORT _SFR_IO8(0x32)
 #define MCSR _SFR_IO8(0x33)
-
-
 #define CDIVCAN _SFR_MEM8(0x100)
 #define CBTR1 _SFR_MEM8(0x101)
 #define CBTR2 _SFR_MEM8(0x102)
@@ -169,15 +124,7 @@
 #define VELACC2 _SFR_MEM8(0x212)
 #define VELACC3 _SFR_MEM8(0x213)
 #define VELCVEL _SFR_MEM8(0x214)
-/*
-#define VELCVEL _SFR_MEM8(0x215)
-#define VELCVEL _SFR_MEM8(0x216)
-*/
 #define VELTVEL _SFR_MEM8(0x217)
-/*
-#define VELTVEL _SFR_MEM8(0x218)
-#define VELTVEL _SFR_MEM8(0x219)
-*/
 #define VELVGCTL _SFR_MEM8(0x21A)
 #define VELSTB _SFR_MEM8(0x21B)
 #define VELIFLG _SFR_MEM8(0x21C)
@@ -216,23 +163,17 @@
 #define INOCR1A _SFR_MEM16(0x804)
 #define INOCR1AL _SFR_MEM8(0x804)
 #define INOCR1AH _SFR_MEM8(0x805)
-#define INOCR1B _SFR_MEM16(0x806)  /* Data sheet says 0x807-0x808, but I believe this is wrong due to conflict with INTCNT. */
+#define INOCR1B _SFR_MEM16(0x806)
 #define INOCR1BL _SFR_MEM8(0x806)
 #define INOCR1BH _SFR_MEM8(0x807)
 #define INTCNT _SFR_MEM8(0x808)
 #define INTCCR0 _SFR_MEM8(0x809)
 #define INTIFR _SFR_MEM8(0x80A)
 #define INTIMSK _SFR_MEM8(0x80B)
-
-
-/* Constants */
-#define RAMSTART     0x1000
-#define RAMEND       0x1FFF    /* Last On-Chip SRAM Location */
-#define E2END        0x0
-#define E2PAGESIZE   0
-#define FLASHEND     0xFFFF
+#define RAMSTART 0x1000
+#define RAMEND 0x1FFF
+#define E2END 0x0
+#define E2PAGESIZE 0
+#define FLASHEND 0xFFFF
 #define _VECTORS_SIZE 0
-
-
-#endif  /* _AVR_IOM3000_H_ */
-
+#endif

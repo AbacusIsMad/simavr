@@ -16,34 +16,36 @@ AVR_CC = $(AVR_ROOT)/avr-gcc
 AVR_CFLAGS = -Os -gdwarf-2 -Wall $(ARCH_FLAGS) -Wl,--relax,--gc-sections -ffunction-sections -fdata-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000
 AVR_PKGS = -Iavr/include -Iarduino_lib/include -Lavr/lib ./arduino_lib/lib/core.a
 
+TEST_LIB = test_tools
 TEST_CC = gcc
 TEST_CFLAGS = -Os -Wall
 TEST_PKGS = -Iresult/include/simavr -Lresult/lib -lsimavr -lelf
 
-runner: arduino_lib data test
+runner: arduino_lib data $(TEST_LIB)
 
 .PHONY: arduino_lib
 arduino_lib:
 	make -C arduino_lib ARCH_FLAGS=$(ARCH_FLAGS_IN)
 
-data: main.cpp
-	$(AVR_CC) -nostdinc $(AVR_CFLAGS) $< -o main.elf $(AVR_PKGS)
+data: main.c vars.S
+	$(AVR_CC) -nostdinc $(AVR_CFLAGS) $^ -o main.elf $(AVR_PKGS)
 
-test: test.c
-	export LD_LIBRARY_PATH=./result/lib/ #this doesn't work
-	$(TEST_CC) $(TEST_CFLAGS) test.c -o test $(TEST_PKGS)
-	$(TEST_CC) $(TEST_CFLAGS) -c -fPIC test.c -o test.o $(TEST_PKGS)
-	$(TEST_CC) -shared test.o -o test.so $(TEST_PKGS)
+$(TEST_LIB): $(TEST_LIB).c
+	$(TEST_CC) $(TEST_CFLAGS) $< -o $@ $(TEST_PKGS)
+	$(TEST_CC) $(TEST_CFLAGS) -c -fPIC $< -o $(basename $<).o $(TEST_PKGS)
+	$(TEST_CC) -shared $(basename $<).o -o $(basename $<).so $(TEST_PKGS)
 
 package: all
 	#delete the unnecessary files
 	make -C arduino_lib package
-	tar -cvz --to-stdout arduino_lib avr bin lib | xz -9 - -c > res
-	zip out.zip -r res result begin.sh test.so load.py
+	tar -cv --to-stdout arduino_lib avr bin lib libexec test_tools.so result | zstd -T0 -22 --ultra --single-thread - > res
+	#tar -cv --to-stdout arduino_lib avr bin lib libexec test_tools.so result | ./7za a -si -t7z -m0=lzma -mx=9 -mfb=128 -md=48m -ms=on res.7z
+	#zip out.zip -r res.7z begin.sh loader.py main.c
+	zip out.zip -r res begin.sh loader.py tester.py main.c vars.S
 
 clean:
 	make -C sim clean
 	rm -rf result
-	rm main.elf test test.o test.so -f
+	rm main.elf $(TEST_LIB) $(TEST_LIB).o $(TEST_LIB).so -f
 	rm out.zip res -f 
 	make -C arduino_lib clean

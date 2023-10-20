@@ -29,7 +29,7 @@ void initVariant() { }
 
 void setupUSB() __attribute__((weak));
 void setupUSB() { }
-
+/*
 int main(void)
 {
 	init();
@@ -49,4 +49,5 @@ int main(void)
         
 	return 0;
 }
+*/
 

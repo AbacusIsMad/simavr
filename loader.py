@@ -19,7 +19,7 @@ class Py_avr_wrap(Structure):
     ]
 
 l0 = CDLL("libsimavr.so.1", RTLD_GLOBAL)
-sim_dll = CDLL("test.so", RTLD_GLOBAL)
+sim_dll = CDLL("test_tools.so", RTLD_GLOBAL)
 
 #configure arg and return types
 sim_dll.py_sim_init.argtypes = [c_char_p, c_char_p, c_bool]
