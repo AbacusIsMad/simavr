@@ -39,6 +39,7 @@ class Sim_Unittest(unittest.TestCase):
                 tc["observed"] = "vals: {}, size: {}".format(addr_vals, size)
         except:
             tc["okay"] = False
+            tc["feedback"] = "the label \"{}\" did not exist".format(label)
         finally:
             Sim_Unittest.res_json.append(tc)
     
