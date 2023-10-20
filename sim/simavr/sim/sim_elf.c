@@ -385,8 +385,10 @@ elf_copy_segment(int fd, Elf32_Phdr *php, uint8_t **dest)
 				rv, php->p_filesz, php->p_vaddr, php->p_offset);
 		return -1;
 	}
+	/*
 	AVR_LOG(NULL, LOG_DEBUG, "Loaded %d bytes at %x\n",
 			php->p_filesz, php->p_vaddr);
+	*/
 	return 0;
 }
 
