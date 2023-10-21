@@ -13,7 +13,7 @@ ARCH_FLAGS_IN = -mmcu=atmega328p\ -DF_CPU=16000000L\ -DARDUINO=10819\ -DARDUINO_
 
 AVR_ROOT = ./bin
 AVR_CC = $(AVR_ROOT)/avr-gcc
-AVR_CFLAGS = -Os -gdwarf-2 -Wall $(ARCH_FLAGS) -Wl,--relax,--gc-sections -ffunction-sections -fdata-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000
+AVR_CFLAGS = -O0 -gdwarf-2 -Wall $(ARCH_FLAGS) -Wl,--relax,--gc-sections -ffunction-sections -fdata-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000
 AVR_PKGS = -Iavr/include -Iarduino_lib/include -Lavr/lib ./arduino_lib/lib/core.a
 
 runner: arduino_lib data test_tools

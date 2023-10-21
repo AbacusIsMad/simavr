@@ -1,8 +1,7 @@
-simusb_flash.bin
-simusb
 *.hex
 *.a
 *.axf
+i2ctest
 *.vcd
 *.swo
 *.swp

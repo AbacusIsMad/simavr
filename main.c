@@ -19,9 +19,12 @@
 static FILE mystdout = {0};
 static int uart_putchar(char c, FILE *stream)
 {
-  UDR0 = c;
-  return 0;
+	loop_until_bit_is_set(UCSR0A, UDRE0);
+	UDR0 = c;
+	return 0;
 }
+
+uint8_t arg_buffer[32] = {0};
 
 //copied from 
 void sim_init()
@@ -171,9 +174,9 @@ void sim_init()
 	// here so they can be used as normal digital i/o; they will be
 	// reconnected in Serial.begin()
 #if defined(UCSRB)
-	UCSRB = 0;
+	//UCSRB = 0;
 #elif defined(UCSR0B)
-	UCSR0B = 0;
+	//UCSR0B = 0;
 #endif
 	fdev_setup_stream(&mystdout, uart_putchar, NULL, _FDEV_SETUP_WRITE);
   	stdout = &mystdout;
@@ -188,23 +191,33 @@ AVR_MCU(F_CPU, "atmega328p");
 #ifdef __cplusplus
 }
 #endif
-extern int a;
+int no_touch = 0;	
+
+uint8_t woah(uint8_t a, uint8_t b);
+
 
 int main(){
 	asm volatile("AVRBIND_sim_init:");
+	//asm volatile(".data\n.global sim_init_a\nsim_init_a: .byte 1, 2\n.text");
+	//asm volatile(".text");
 	sim_init();
-	#ifdef __cplusplus
-	Serial.begin(9600);
-	#endif
+	static int a = 5;
+	
+	asm volatile("AVRBIND_woah_begin:");
+	a = woah(arg_buffer[0], arg_buffer[1]);
+	asm volatile("AVRBIND_woah_end:");
+	
+	
+
 	for (int i = 0; i < 10; i++){
-		#ifdef __cplusplus
-		Serial.println("hello world");
-		//printf("hello world %d\n", a);
-		#else
-		printf("hello world %d\n", a);
-		#endif
+		printf("hello world %d\n", a++);
 		a += 1;
 		delay(500);
 	}
+	//this makes sure functions below it don't get optimized out lmao
+	if (!no_touch){
+		return 0;
+	}
+	woah(1, 2);
 	return 0;
 }

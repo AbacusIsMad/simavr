@@ -12,4 +12,10 @@ empty: .zero 10
 .size my_string, 13
 my_string: .asciz "hello world!"
 
+.section .text
+.global woah
+woah:
+	add r24, r22
+	ret
+
 .end

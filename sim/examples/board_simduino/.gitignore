@@ -1,1 +1,10 @@
+*.hex
+*.a
+*.axf
+simduino
+*.vcd
+*.swo
+*.swp
+*.swm
+*.swn
 *.bin

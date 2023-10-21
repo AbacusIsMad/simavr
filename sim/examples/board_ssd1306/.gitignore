@@ -1,8 +1,7 @@
-simusb_flash.bin
-simusb
 *.hex
 *.a
 *.axf
+ssd1306demo
 *.vcd
 *.swo
 *.swp
