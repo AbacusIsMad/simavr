@@ -5,7 +5,7 @@ all: sim runner
 
 .PHONY: sim runner
 sim:
-	make -C sim AVR_ROOT=/home/ruize/Desktop/avr8-gnu-toolchain-linux_x86_64/bin CFLAGS="-O0 -Wall -Wextra -g -fPIC -lelf -std=gnu99 -Wno-sign-compare -Wno-unused-parameter -DHAVE_LIBELF -DCONFIG_SIMAVR_TRACE=0" RELEASE=1 
+	make -C sim AVR_ROOT=/home/ruize/Desktop/avr8-gnu-toolchain-linux_x86_64/bin CFLAGS="-O0 -Wall -Wextra -g -fPIC -lelf -std=gnu99 -Wno-sign-compare -Wno-unused-parameter -DHAVE_LIBELF -DCONFIG_SIMAVR_TRACE=0 -DBIND_AVR_LABELS=AVRBIND_" RELEASE=1 
 	make -C sim DESTDIR=${CURDIR}"/result" install
 
 ARCH_FLAGS = -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10819 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR
@@ -16,24 +16,17 @@ AVR_CC = $(AVR_ROOT)/avr-gcc
 AVR_CFLAGS = -Os -gdwarf-2 -Wall $(ARCH_FLAGS) -Wl,--relax,--gc-sections -ffunction-sections -fdata-sections -Wl,--undefined=_mmcu,--section-start=.mmcu=0x910000
 AVR_PKGS = -Iavr/include -Iarduino_lib/include -Lavr/lib ./arduino_lib/lib/core.a
 
-TEST_LIB = test_tools
-TEST_CC = gcc
-TEST_CFLAGS = -Os -Wall
-TEST_PKGS = -Iresult/include/simavr -Lresult/lib -lsimavr -lelf
+runner: arduino_lib data test_tools
 
-runner: arduino_lib data $(TEST_LIB)
-
-.PHONY: arduino_lib
+.PHONY: arduino_lib test_tools
 arduino_lib:
 	make -C arduino_lib ARCH_FLAGS=$(ARCH_FLAGS_IN)
 
 data: main.c vars.S
 	$(AVR_CC) -nostdinc $(AVR_CFLAGS) $^ -o main.elf $(AVR_PKGS)
 
-$(TEST_LIB): $(TEST_LIB).c
-	$(TEST_CC) $(TEST_CFLAGS) $< -o $@ $(TEST_PKGS)
-	$(TEST_CC) $(TEST_CFLAGS) -c -fPIC $< -o $(basename $<).o $(TEST_PKGS)
-	$(TEST_CC) -shared $(basename $<).o -o $(basename $<).so $(TEST_PKGS)
+test_tools:
+	make -C test_tools
 
 package: all
 	#delete the unnecessary files
@@ -49,3 +42,4 @@ clean:
 	rm main.elf $(TEST_LIB) $(TEST_LIB).o $(TEST_LIB).so -f
 	rm out.zip res -f 
 	make -C arduino_lib clean
+	make -C test_tools clean

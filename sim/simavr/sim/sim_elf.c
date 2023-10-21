@@ -558,11 +558,22 @@ elf_read_firmware(
 				// libelf grabs the symbol data using gelf_getsym()
 				gelf_getsym(edata, i, &sym);
 
+				const char * name = elf_strptr(elf, shdr.sh_link, sym.st_name);
+				//printf("found symbol '%s'\n", name);
+
 				// print out the value and size
 				if (ELF32_ST_BIND(sym.st_info) == STB_GLOBAL ||
                                     ELF32_ST_TYPE(sym.st_info) == STT_FUNC ||
-                                    ELF32_ST_TYPE(sym.st_info) == STT_OBJECT) {
-					const char * name = elf_strptr(elf, shdr.sh_link, sym.st_name);
+                                    ELF32_ST_TYPE(sym.st_info) == STT_OBJECT
+                    #ifdef BIND_AVR_LABELS
+                    //make all labels named AVRBIND_... visible
+                    #define STRINGIZE(x) #x
+					#define STRINGIZE_VALUE_OF(x) STRINGIZE(x)
+                    || (!strncmp(name, STRINGIZE_VALUE_OF(BIND_AVR_LABELS), 
+                    strlen(STRINGIZE_VALUE_OF(BIND_AVR_LABELS))))
+                    #endif
+                    ) {
+					//const char * name = elf_strptr(elf, shdr.sh_link, sym.st_name);
 #if VERBOSE
 					printf("Symbol %s bind %d type %d value %lx size %ld visibility %d\n",
 					       name, ELF32_ST_BIND(sym.st_info),
@@ -582,7 +593,7 @@ elf_read_firmware(
 						if (n > 9 &&
 						    !strcmp(&name[n - 9],
 							    "_LENGTH__")) {
-							//printf(" Ignored\n");
+							//printf("symbol %s Ignored\n", name);
 							continue;
 						}
 					}

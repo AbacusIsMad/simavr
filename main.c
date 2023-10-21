@@ -191,6 +191,7 @@ AVR_MCU(F_CPU, "atmega328p");
 extern int a;
 
 int main(){
+	asm volatile("AVRBIND_sim_init:");
 	sim_init();
 	#ifdef __cplusplus
 	Serial.begin(9600);

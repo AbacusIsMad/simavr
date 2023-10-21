@@ -19,20 +19,7 @@
 	along with simavr.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <libgen.h>
-#include <pthread.h>
-#include <stdint.h>
-#include <string.h>
-
-#include "sim_avr.h"
-#include "sim_core.h"
-#include "avr_twi.h"
-#include "sim_elf.h"
-#include "sim_gdb.h"
-#include "sim_vcd_file.h"
+#include "test_tools.h"
 
 //for data structures
 #include "sglib.h"
@@ -42,13 +29,7 @@
 avr_t * avr = NULL;
 avr_vcd_t vcd_file;
 
-typedef struct py_avr_wrapper {
-	avr_t * avr;
-	uint32_t stop_addr;
-	uint32_t symbolcount;
-	avr_symbol_t ** symbol_addr_sorted;
-	avr_symbol_t ** symbol_name_sorted;
-} py_avr_wrapper;
+
 
 
 avr_symbol_t * get_symbol(py_avr_wrapper * py, const char * label){
@@ -135,6 +116,18 @@ uint8_t * get_data_at_label(py_avr_wrapper * py, const char * label, uint32_t * 
 	return res;
 }
 
+void print_symbols(py_avr_wrapper * py){
+	puts("Sorted by address\t\t\tsorted by name");
+	for (int i = 0; i < py->symbolcount; i++){
+		avr_symbol_t *ad = py->symbol_addr_sorted[i], *lb = py->symbol_name_sorted[i];
+		char buf[80];
+		sprintf(buf, "0x%08x (%d): %s", ad->addr, ad->size, ad->symbol);
+		printf("%-35.35s   ", buf);
+		sprintf(buf, "0x%08x (%d): %s", lb->addr, lb->size, lb->symbol);
+		printf("%-35.35s\n", buf);
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2){
@@ -153,6 +146,9 @@ int main(int argc, char *argv[])
 		avr->state = cpu_Stopped;
 		avr_gdb_init(avr);
 	}
+	
+	//printf("%x, %x, %x\n", avr->ramend, avr->flashend, avr->e2end);
+	print_symbols(py);
 
 	int state = cpu_Running;
 	while ((state != cpu_Done) && (state != cpu_Crashed)){
