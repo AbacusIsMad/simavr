@@ -720,6 +720,8 @@ run_one_again:
 	uint32_t		opcode = _avr_flash_read16le(avr, avr->pc);
 	avr_flashaddr_t	new_pc = avr->pc + 2;	// future "default" pc
 	int 			cycle = 1;
+	
+	//printf("opcode: %08x\n", opcode);
 
 	switch (opcode & 0xf000) {
 		case 0x0000: {

@@ -22,6 +22,7 @@ typedef struct py_avr_wrapper {
 	uint32_t symbolcount;
 	avr_symbol_t ** symbol_addr_sorted;
 	avr_symbol_t ** symbol_name_sorted;
+	uint8_t * (*get_data)(struct py_avr_wrapper *); //expose data for python
 } py_avr_wrapper;
 
 #endif

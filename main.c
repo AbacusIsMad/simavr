@@ -192,7 +192,7 @@ AVR_MCU(F_CPU, "atmega328p");
 }
 #endif
 int no_touch = 0;	
-
+int a = 12;
 uint8_t woah(uint8_t a, uint8_t b);
 
 
@@ -201,11 +201,10 @@ int main(){
 	//asm volatile(".data\n.global sim_init_a\nsim_init_a: .byte 1, 2\n.text");
 	//asm volatile(".text");
 	sim_init();
-	static int a = 5;
 	
-	asm volatile("AVRBIND_woah_begin:");
+	asm volatile("AVRBIND_woah_BEGIN:");
 	a = woah(arg_buffer[0], arg_buffer[1]);
-	asm volatile("AVRBIND_woah_end:");
+	asm volatile("AVRBIND_woah_END:");
 	
 	
 

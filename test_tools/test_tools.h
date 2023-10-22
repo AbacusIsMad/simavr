@@ -3,6 +3,7 @@
 
 #include "shared.h"
 #include "util.h"
+#include "test_functions.h"
 
 //initialises an avr and a wrapper
 py_avr_wrapper * py_sim_init(const char* fname, char* mmcu_name, bool do_startup);

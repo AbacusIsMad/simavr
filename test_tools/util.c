@@ -19,7 +19,7 @@ uint8_t * get_data_at_label(py_avr_wrapper * py, const char * label, uint32_t * 
 	avr_symbol_t * symbol = get_symbol(py, label);
 	if (symbol == NULL) return NULL;
 	
-	*size = symbol->size;
+	if (size != NULL) *size = symbol->size;
 	uint8_t * res = py->avr->data + (symbol->addr - AVR_SEGMENT_OFFSET_DATA);
 	/*
 	for (int i = 0; i < 0x800; i++){

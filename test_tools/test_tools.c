@@ -29,6 +29,10 @@
 avr_t * avr = NULL;
 avr_vcd_t vcd_file;
 
+static uint8_t * _py_get_data(py_avr_wrapper * py){
+	return py->avr->data;
+}
+
 py_avr_wrapper * py_sim_init(const char* fname, char* mmcu_name, bool do_startup){
 	elf_firmware_t f = {{0}};
 	elf_read_firmware(fname, &f);
@@ -67,6 +71,7 @@ py_avr_wrapper * py_sim_init(const char* fname, char* mmcu_name, bool do_startup
 			avr_run(avr);
 		}
 	}
+	res->get_data = _py_get_data;
 	return res;
 }
 
@@ -99,6 +104,26 @@ void print_symbols(py_avr_wrapper * py){
 	}
 }
 
+uint8_t args[2] = {4, 5};
+
+int woah_validate(py_avr_wrapper * py){
+	puts("validating...");
+	//uint16_t * res = (uint16_t*)get_data_at_label(py, "a", NULL);
+	uint8_t res = py->avr->data[24];
+	printf("expected %hhu, got %hhu\n", args[0] + args[1], res);
+	return 0;
+}
+
+int prologue_validate(py_avr_wrapper * py){
+	puts("prologue"); return 0;
+}
+int running_validate(py_avr_wrapper * py){
+	puts("running"); return 0;
+}
+int epilogue_validate(py_avr_wrapper * py){
+	puts("epilogue"); return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2){
@@ -120,7 +145,33 @@ int main(int argc, char *argv[])
 	
 	//printf("%x, %x, %x\n", avr->ramend, avr->flashend, avr->e2end);
 	print_symbols(py);
-
+	for (int i = 0; i < 10; i++){
+		printf("running function woah (%d out of %d):\n", i, 10);
+		args[0] = rand(), args[1] = rand();
+		printf("with arguments %hhu, %hhu\n", args[0], args[1]); 
+		int res = supervise_func_all(
+			py,
+			"woah",
+			"AVRBIND_woah_BEGIN",
+			"AVRBIND_woah_END",
+			args,
+			2,
+			20,
+			prologue_validate,
+			running_validate,
+			woah_validate,
+			epilogue_validate
+		);
+		if (res == 1){
+			puts("symbol cannot be found");
+		} else if (res == 2){
+			puts("the function did not return or took too long");
+		} else { //validate a
+			puts("things went smoothly");
+		}
+	}
+	
+	/*
 	int state = cpu_Running;
 	while ((state != cpu_Done) && (state != cpu_Crashed)){
 		state = avr_run(avr);
@@ -131,4 +182,5 @@ int main(int argc, char *argv[])
 		} else {}
 	}
 	puts("done");
+	*/
 }

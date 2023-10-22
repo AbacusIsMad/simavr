@@ -36,7 +36,7 @@ void py_avr_restore(py_avr_wrapper * py, avr_save * momento, bool copy_flash){
 	if (copy_flash && momento->copy_flash){
 		avr->flash = malloc((momento->flashend + 1) * sizeof(uint8_t));
 		memcpy(avr->flash, momento->flash, (momento->flashend + 1) * sizeof(uint8_t));
-	} else avr->flash = momento->flash;
+	}
 	
 	avr->cycle = momento->cycle;
 	avr->run_cycle_count = momento->run_cycle_count;
@@ -50,7 +50,7 @@ void py_avr_restore(py_avr_wrapper * py, avr_save * momento, bool copy_flash){
 
 void py_avr_free_save(avr_save * momento){
 	if (momento == NULL) return;
-	free(momento->flash);
+	if (momento->copy_flash) free(momento->flash);
 	free(momento->data);
 	free(momento);
 }
