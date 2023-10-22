@@ -111,10 +111,11 @@ int supervise_func_all(
 	if (after_run_validate != NULL && after_run_validate(py) != 0){
 		//puts("validation failed");
 		supervise_func_finalise(py, momento, end, false, NULL);
+		return 3;
 	} else {
 		//epilogue validation failed
 		//puts("epilogue C");
-		if (supervise_func_finalise(py, momento, end, true, epilogue_validate) != 0) return 3; 
+		if (supervise_func_finalise(py, momento, end, true, epilogue_validate) != 0) return 4; 
 	}
 	return 0;
 }

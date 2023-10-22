@@ -108,6 +108,7 @@ class Sim_Test(unittest.TestCase):
 		#method 1: watch sram for return location
 		sram = type(self).sim.get_data_at_addr(type(self).sim.sim, 0)
 		def after_validate(obj):
+			print(sram[24])
 			return 1 if sram[24] != 30 else 0
 		res = type(self).sim.test_func_all("woah", [10, 20], 20, after_validate=after_validate)
 		if res != 0:
