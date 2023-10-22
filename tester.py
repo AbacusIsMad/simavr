@@ -57,12 +57,12 @@ class Sim_Test(unittest.TestCase):
 		self.tc.update(**kwargs)
 	
 	def test_function_return(self):
-		self.update(name="function returned")
+		self.update(name="function returned", ok=True)
 		res = type(self).sim.test_func_all("woah", [0, 0], 20)
 		self.update(passed = (res == 0), feedback = "function returned" if res == 0 else "the function either did not return or took too long (limit for this test is {} instructions)".format(20))
 	
 	def test_function_stack_pos(self):
-		self.update(name="stack is restored correctly")
+		self.update(name="stack is restored correctly", ok=True)
 		sram = type(self).sim.get_data_at_addr(type(self).sim.sim, 0)
 		s = sram[32 + 0x3d] | (sram[32 + 0x3e] << 8)
 		sp, sp_next, sp_cur = [s], [s], [0]
@@ -81,7 +81,7 @@ class Sim_Test(unittest.TestCase):
 			self.update(passed=True, feedback="the stack was correctly restored")
 	
 	def test_function_register_restored(self):
-		self.update(name="registers are saved")
+		self.update(name="registers are saved", ok=True)
 		sram = type(self).sim.get_data_at_addr(type(self).sim.sim, 0)
 		regs = np.array(sram[0:32], dtype=np.uint8) #save a copy
 		fail = [False]
@@ -104,7 +104,7 @@ class Sim_Test(unittest.TestCase):
 		
 	
 	def test_value(self):
-		self.update(name="function adds")
+		self.update(name="function adds", ok=True)
 		#method 1: watch sram for return location
 		sram = type(self).sim.get_data_at_addr(type(self).sim.sim, 0)
 		def after_validate(obj):
@@ -116,7 +116,7 @@ class Sim_Test(unittest.TestCase):
 			self.update(passed=True)
 		
 	def test_overflow(self):
-		self.update(name="function handles int overflow")
+		self.update(name="function handles int overflow", ok=True)
 		#method 2: let it run and watch label
 		#res = type(self).sim.test_func_all("woah", [255, 2], 20, epilogue_validate=e)
 		res = type(self).sim.test_func_all("woah", [255, 2], 20)
