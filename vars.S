@@ -12,8 +12,9 @@ my_string: .asciz "hello world!"
 .section .text
 .global woah
 woah:
+	;change this to fail the functionality testcases
 	add r24, r22
-	;we do a little bit of trolling
+	;uncomment the below to fail the stack testcase
 	/*
 	pop r26
 	pop r27
@@ -21,8 +22,11 @@ woah:
 	push r27
 	push r26
 	*/
+	;uncomment the below to fail the register testcase
 	;inc r4
 	;inc r5
+	
+	;comment below to fail the return testcase
 	ret
 
 .end

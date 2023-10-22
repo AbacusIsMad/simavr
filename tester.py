@@ -77,7 +77,7 @@ class Sim_Test(unittest.TestCase):
 		res = type(self).sim.test_func_all("woah", [0, 0], 20, prologue_validate=get_sp, after_validate=after_validate)
 		print(hex(sp[0]), hex(sp_cur[0]), res)
 		if res != 0 or sp[0] != sp_cur[0]:
-			self.update(passed=False, feedback="the stack was incorrectly restored (before call: <{}>, after: <{}>)".format(sp[0], sp_cur[0]))
+			self.update(passed=False, feedback="the stack was incorrectly restored (before call: <{}>, after: <{}>)".format(hex(sp[0]), hex(sp_cur[0])))
 		else:
 			self.update(passed=True, feedback="the stack was correctly restored")
 	

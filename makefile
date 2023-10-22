@@ -31,10 +31,10 @@ test_tools:
 package: all
 	#delete the unnecessary files
 	make -C arduino_lib package
-	tar -cv --to-stdout arduino_lib avr bin lib libexec test_tools.so result | zstd -T0 -22 --ultra --single-thread - > res
+	tar -cv --to-stdout arduino_lib avr bin lib libexec test.so result | zstd -T0 -22 --ultra --single-thread - > res
 	#tar -cv --to-stdout arduino_lib avr bin lib libexec test_tools.so result | ./7za a -si -t7z -m0=lzma -mx=9 -mfb=128 -md=48m -ms=on res.7z
 	#zip out.zip -r res.7z begin.sh loader.py main.c
-	zip out.zip -r res begin.sh loader.py tester.py main.c vars.S
+	zip out.zip -r res begin.sh loader.py tester.py main.c main.h vars.S
 
 clean:
 	make -C sim clean

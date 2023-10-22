@@ -25,3 +25,6 @@ compile_commands.json
 result/*
 test
 test.so
+__pycache__/*
+out.zip
+res

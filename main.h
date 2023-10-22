@@ -1,3 +1,5 @@
+#ifndef TEST_MAIN
+#define TEST_MAIN
 
 #include <avr/io.h>
 #include <Arduino.h>
@@ -155,4 +157,6 @@ extern "C"
 AVR_MCU(F_CPU, "atmega328p");
 #ifdef __cplusplus
 }
+#endif
+
 #endif
