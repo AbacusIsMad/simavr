@@ -18,10 +18,15 @@ class Sim_Test(unittest.TestCase):
 	def setUpClass(cls):
 		cls.sim = Simulator("./main.elf")
 		cls.res_json = []
+		cls.fd_stdout = os.dup(1)
+		devnull = os.open(os.devnull, os.O_WRONLY)
+		os.dup2(devnull, 1)
+		os.close(devnull)
 
 	@classmethod
 	def tearDownClass(cls):
 		del cls.sim
+		os.dup2(cls.fd_stdout, 1)
 		res = {"testcases" : cls.res_json}
 		print(json.dumps(res))
 	
@@ -108,7 +113,6 @@ class Sim_Test(unittest.TestCase):
 		#method 1: watch sram for return location
 		sram = type(self).sim.get_data_at_addr(type(self).sim.sim, 0)
 		def after_validate(obj):
-			print(sram[24])
 			return 1 if sram[24] != 30 else 0
 		res = type(self).sim.test_func_all("woah", [10, 20], 20, after_validate=after_validate)
 		if res != 0:
