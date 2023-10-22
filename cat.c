@@ -69,4 +69,11 @@
 
 #define ATTRIBS(fname,...) APPLYXn(fname,__VA_ARGS__)
 
-ATTRIBS(woah, int b, char* c)
+#define BIND_AVR_LABELS "AVR_BIND_"
+
+#define UUT_WRAP_FUNC(fname, statement)\
+	asm volatile(BIND_AVR_LABELS fname "_BEGIN:"); \
+	{statement;} \
+	asm volatile("BIND_AVR_LABELS fname "_END:"");
+
+UUT_WRAP_FUNC(woah, a = woah(arg_buffer[0], arg_buffer[1]));

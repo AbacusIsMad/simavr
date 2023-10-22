@@ -55,8 +55,8 @@ int supervise_func_finalise(
 	}
 	avr_symbol_t * end = get_symbol(py, end_label);
 	if (end == NULL) return 1; //symbol not found
-	
-	if (epilogue_validate == NULL || !do_run) jump_to(py, end->addr);
+	//even if epilogue_validate is NULL, still try to run it
+	if (!do_run) jump_to(py, end->addr);
 	else {
 		if (run_until(py, end->addr, 0, epilogue_validate) != 0){
 			//validation failed - restore context
@@ -64,6 +64,10 @@ int supervise_func_finalise(
 				py_avr_restore(py, momento, false);
 			}
 			jump_to(py, end->addr);
+			if (momento != NULL){
+				py_avr_free_save(momento);
+			}
+			return 1; //failed validation
 		}
 	}
 	if (momento != NULL){
@@ -105,9 +109,12 @@ int supervise_func_all(
 	//call ctypes func. This will handle result writing etc
 	//if no validation function provided, succeed
 	if (after_run_validate != NULL && after_run_validate(py) != 0){
+		//puts("validation failed");
 		supervise_func_finalise(py, momento, end, false, NULL);
 	} else {
-		supervise_func_finalise(py, momento, end, true, epilogue_validate);
+		//epilogue validation failed
+		//puts("epilogue C");
+		if (supervise_func_finalise(py, momento, end, true, epilogue_validate) != 0) return 3; 
 	}
 	return 0;
 }
@@ -123,7 +130,7 @@ int run_until(py_avr_wrapper * py, avr_flashaddr_t pc, uint32_t inst_limit, py_v
 	uint32_t inst_count = 0;
 	int state = 0;
 	while(py->avr->pc != pc){
-		//printf("pc at 0x%08x\n", py->avr->pc);
+		//printf("pc at 0x%08x, target 0x%08x\n", py->avr->pc, pc);
 		state = avr_run(py->avr);
 		if ((state == cpu_Done) || (state == cpu_Crashed)) {
 			return 1; //crashed
@@ -132,8 +139,12 @@ int run_until(py_avr_wrapper * py, avr_flashaddr_t pc, uint32_t inst_limit, py_v
 		if (inst_limit > 0 && inst_count > inst_limit) {
 			return 2; //reached limit
 		}
-		if (validate != NULL && validate(py) != 0){
-			return 3; //validation failed
+		if (validate != NULL){
+			if (validate(py) != 0){
+				return 3; //validation failed
+			}
+		} else {
+			//puts("no validation func");
 		}
 	}
 	return 0;

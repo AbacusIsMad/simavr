@@ -259,6 +259,7 @@ static inline void _avr_set_r(avr_t * avr, uint16_t r, uint8_t v)
 	}
 	if (r > 31) {
 		avr_io_addr_t io = AVR_DATA_TO_IO(r);
+		//this is new
 		if (avr->io[io].w.c) {
 			avr->io[io].w.c(avr, r, v, avr->io[io].w.param);
 		} else {

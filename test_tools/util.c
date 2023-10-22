@@ -20,7 +20,9 @@ uint8_t * get_data_at_label(py_avr_wrapper * py, const char * label, uint32_t * 
 	if (symbol == NULL) return NULL;
 	
 	if (size != NULL) *size = symbol->size;
-	uint8_t * res = py->avr->data + (symbol->addr - AVR_SEGMENT_OFFSET_DATA);
+	return get_data_at_addr(py, (symbol->addr - AVR_SEGMENT_OFFSET_DATA));
+	
+	//uint8_t * res = py->avr->data + (symbol->addr - AVR_SEGMENT_OFFSET_DATA);
 	/*
 	for (int i = 0; i < 0x800; i++){
 		if (i % 16 == 0) printf("\n0x%04x: ", i);
@@ -28,7 +30,11 @@ uint8_t * get_data_at_label(py_avr_wrapper * py, const char * label, uint32_t * 
 	}
 	putchar('\n');
 	*/
-	return res;
+	//return res;
+}
+
+uint8_t * get_data_at_addr(py_avr_wrapper * py, uint16_t addr){
+	return py->avr->data + addr;
 }
 
 uint16_t get_sp(py_avr_wrapper * py){

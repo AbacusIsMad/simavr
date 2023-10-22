@@ -13,6 +13,16 @@ my_string: .asciz "hello world!"
 .global woah
 woah:
 	add r24, r22
+	;we do a little bit of trolling
+	/*
+	pop r26
+	pop r27
+	push r0
+	push r27
+	push r26
+	*/
+	;inc r4
+	;inc r5
 	ret
 
 .end
