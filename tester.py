@@ -75,7 +75,6 @@ class Sim_Test(unittest.TestCase):
 			sp_cur[0] = sram[32 + 0x3d] | (sram[32 + 0x3e] << 8)
 			return 0
 		res = type(self).sim.test_func_all("woah", [0, 0], 20, prologue_validate=get_sp, after_validate=after_validate)
-		print(hex(sp[0]), hex(sp_cur[0]), res)
 		if res != 0 or sp[0] != sp_cur[0]:
 			self.update(passed=False, feedback="the stack was incorrectly restored (before call: <{}>, after: <{}>)".format(hex(sp[0]), hex(sp_cur[0])))
 		else:
@@ -119,13 +118,9 @@ class Sim_Test(unittest.TestCase):
 	def test_overflow(self):
 		self.update(name="function handles int overflow")
 		#method 2: let it run and watch label
-		def e(obj):
-			print("epilogue")
-			return 0
 		#res = type(self).sim.test_func_all("woah", [255, 2], 20, epilogue_validate=e)
 		res = type(self).sim.test_func_all("woah", [255, 2], 20)
 		addr, size = type(self).sim.get_data_at_label("a")
-		print(cast(addr, POINTER(c_uint16))[0])
 		if res != 0 or cast(addr, POINTER(c_uint16))[0] != 1:
 			self.update(passed=False, feedback="incorrect result. expected 1")
 		else:
