@@ -146,9 +146,9 @@ int main(int argc, char *argv[])
 	//printf("%x, %x, %x\n", avr->ramend, avr->flashend, avr->e2end);
 	print_symbols(py);
 	uint8_t * e2e = get_data_at_label(py, "E2E_SWITCH", NULL);
-	//e2e[0] = 1; //turn on running
+	e2e[0] = 1; //turn on running
 	//mprintf("%hhx, %hhx\n", py->avr->data[32 + 0x3d], py->avr->data[32 + 0x3e]);
-	
+	/*
 	for (int i = 0; i < 10; i++){
 		printf("running function woah (%d out of %d):\n", i, 10);
 		args[0] = rand(), args[1] = rand();
@@ -174,9 +174,8 @@ int main(int argc, char *argv[])
 			puts("things went smoothly");
 		}
 	}
+	*/
 	
-	
-	/*
 	int state = cpu_Running;
 	while ((state != cpu_Done) && (state != cpu_Crashed)){
 		state = avr_run(avr);
@@ -186,7 +185,7 @@ int main(int argc, char *argv[])
 			state = cpu_Done;
 		} else {}
 	}
-	*/
+	
 	puts("done");
 	
 }
